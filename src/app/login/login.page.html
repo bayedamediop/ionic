@@ -1,0 +1,42 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-img src="assets/money_logo.png">
+    </ion-img>
+    <ion-title class=" ">Login</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+      <form [formGroup]="formulaire" (submit)="onSubmit()">
+      <ion-row>
+        <ion-col size-sm="6" size-md="4" offset-sm="3">
+          <ion-item>
+            <ion-label position="floating">Username</ion-label>
+            <ion-input  type="text" required formControlName="email" ></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size-sm="6" size-md="4" offset-sm="3">
+          <ion-item>
+            <ion-label position="floating">Password</ion-label>
+            <ion-input  type="password" required formControlName="password"></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size-sm="6" size-md="4" offset-sm="3">
+    
+           <p class="ion-text-center">Mot de passe oublier?</p>
+      
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size-sm="6" size-md="4" offset-sm="3">
+      <ion-button  type="submit" class="ion-margin-button" expand="black">Login</ion-button>
+        </ion-col>
+      </ion-row>
+    </form>
+  </ion-grid>
+</ion-content>

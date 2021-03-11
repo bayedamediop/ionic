@@ -1,0 +1,82 @@
+<ion-header>
+ 
+ <ion-grid class="grid" >
+<ion-row>
+  <ion-col  class="hamburger haut" size-sm="4" size-md="2" offset-sm="2">
+    
+        <ion-menu-button menu="main-menu"></ion-menu-button>
+  </ion-col>
+  <ion-col size-sm="4" size-md="4" offset-sm="2">
+    <img class="monay" src="assets/min_logo.jpeg">
+ </ion-col>
+ <ion-col size-sm="4" size-md="4" offset-sm="2">
+  <img class="user" src="data:image/jpeg;base64,{{imageUser}}">
+</ion-col>
+</ion-row>
+ </ion-grid>
+ <ion-card class="card">
+ <ion-grid >  
+  <ion-row>
+    <ion-col  size-sm="4" size-md="2" offset-sm="2">
+      Mon solde disponible
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col style="font-size: x-large;" size-sm="4" size-md="4" offset-sm="2">
+      <span>{{solde}}</span>      frca
+   </ion-col>
+  </ion-row>
+ <ion-row>
+   <ion-col  size-sm="4" size-md="4" offset-sm="2">
+    16/12/1995
+  </ion-col>
+  </ion-row>
+   </ion-grid>
+  </ion-card>
+</ion-header>
+
+<ion-content>
+        <ion-grid>
+          <ion-row>
+            <ion-col  size-sm="4" size-md="8" offset-sm="2">
+              <ion-menu-toggle auto-hide="false">
+                <ion-item button>
+                  <ion-icon name="return-up-forward-outline" style = "color:rgb(245, 109, 59)"></ion-icon>
+                  <ion-label [routerLink]="['/depot']">Dépot  </ion-label >
+                </ion-item>
+              </ion-menu-toggle>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col  size-sm="8" size-md="8" offset-sm="2">
+              <ion-menu-toggle auto-hide="false">
+                <ion-item button>
+                  <ion-icon name="return-up-back-outline" style = "color:rgb(245, 109, 59)"></ion-icon>
+                 <ion-label [routerLink]="['/retrait']">Retrait </ion-label >
+             </ion-item>
+              </ion-menu-toggle>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col  size-sm="6" size-md="4" offset-sm="2">
+              <ion-menu-toggle auto-hide="false">
+                <ion-item button>
+                  <ion-icon name="sync-outline" style = "color:rgb(245, 109, 59)"></ion-icon>
+                 <ion-label [routerLink]="['/transaction']"> Mes transactions </ion-label >
+             </ion-item>
+              </ion-menu-toggle>
+            </ion-col> 
+          </ion-row>
+        <ion-row>
+            <ion-col  size-sm="6" size-md="4" offset-sm="2">
+              <ion-menu-toggle auto-hide="false">
+                <ion-item button>
+                  <ion-icon name="calculator-outline" style = "color:rgb(245, 109, 59)"></ion-icon>
+                  <ion-label [routerLink]="['/transaction']"> Calculateur de rfais </ion-label >
+                  </ion-item>
+              </ion-menu-toggle>
+            </ion-col>     
+          </ion-row>
+        </ion-grid>
+      </ion-content>
+  
