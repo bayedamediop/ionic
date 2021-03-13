@@ -26,9 +26,9 @@ export class LoginPage {
      ) { }
 
      formulaire = new FormGroup({
-     email: new FormControl('',[Validators.required]),
+     email: new FormControl('adminagence2@gmail.com',[Validators.required]),
 
-     password: new FormControl('',[Validators.required]) 
+     password: new FormControl('diop',[Validators.required]) 
   });
   async onSubmit() {
   

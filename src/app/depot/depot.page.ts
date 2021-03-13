@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { AlertController, LoadingController } from '@ionic/angular';
 import { AuthService } from '../auth/auth.service';
+import { TransactionService } from '../auth/transaction.service';
 import { UserService } from '../auth/user.service';
 
 @Component({
@@ -31,7 +33,10 @@ export class DepotPage implements OnInit {
     this.activeBeneficier = true;
     this.activeEmeteur = false;
   }
-  constructor( private authService: AuthService , private fb: FormBuilder, private userService: UserService) { }
+  constructor( private authService: AuthService , 
+    private fb: FormBuilder, private userService: UserService,
+    private loadingCtrl: LoadingController,
+    private transaction: TransactionService, private alertCtrl: AlertController) { }
   token: any;
   nameUserConnected: string;
   nom: string;
@@ -43,30 +48,13 @@ export class DepotPage implements OnInit {
   frai: any;
   helper = new JwtHelperService(); ;
  ngOnInit(): void {
-  //   this.formulaire = this.fb.group ({
-  //     cni:['',Validators.required] ,
-  //     nomComplet:['',Validators.required],
-  //     phone:['',Validators.required] ,
-  //     montant: ['',Validators.required],
-  //     frais:['',Validators.required] ,
-  //     total:['',Validators.required] ,
-      
-  //  });
-  //  this.formulaire1 = this.fb.group ({
-  //   nomComplet:['',Validators.required],
-  //   phone:['',Validators.required] ,
-  //   userDepotId:['',Validators.required] ,
-  //   compteId: ['',Validators.required] ,
-  //  })
-   this.frai= this.authService.getAllfrais()
-   //console.log(this.frai);
-   
-    
-   for(let $i = 0; $i < this.frai; $i++)  {
-    console.log(this.frai[$i]);
-    
-   }
 
+   this.frai= this.authService.getAllfrais()
+   this.frai.forEach(element => {
+     console.log(element[0]['id']);
+     
+     
+   });
     this.token = this.authService.getToken() ;
     const tokenDecoded = this.helper.decodeToken(this.token);
    // console.log(tokenDecoded);
@@ -97,21 +85,17 @@ export class DepotPage implements OnInit {
   }
 
   formulaire = new FormGroup({
-    cni: new FormControl('',[Validators.required]),
-    nomComplet: new FormControl('',[Validators.required]) ,
-    phone: new FormControl('',[Validators.required]) ,
-    montant: new FormControl('',[Validators.required]) ,
-    frais: new FormControl('',[Validators.required]) ,
-    total: new FormControl('',[Validators.required]) ,
-    userDepotId: new FormControl() ,
-    compteId: new FormControl('',[Validators.required]) ,
+    client: new FormGroup({ cni: new FormControl('1750 2010 039746',[Validators.required]),
+    nomComplet: new FormControl('lo ndaye',[Validators.required]) ,
+    phone: new FormControl('775657642',[Validators.required])
+   }),
+   client_recu: new FormGroup({ 
+    nomComplet: new FormControl('lo fatou',[Validators.required]) ,
+    phone: new FormControl('764553709',[Validators.required]) ,
+   }),
+    montant: new FormControl(10000,[Validators.required]),
+    
  });
- formbenfiche = new FormGroup({
-  nomComplet: new FormControl('',[Validators.required]) ,
-  phone: new FormControl('',[Validators.required]) ,
- 
-});
- 
 
   frais(montant: any) {
     const frais = this.authService.getAllfrais()
@@ -121,18 +105,31 @@ export class DepotPage implements OnInit {
     });
   }
  
-  onSubmit() {
-  //console.log(this.idCompte);
-  //console.log(this.user);
-  
-  console.log(this.formbenfiche.value);
-  console.log(this.formulaire.value);
-  // this.authService. (formElement.value) .subscribe (
-  //   (réponse) => {
-  //     alert ('utilisateur ajouté avec succès!');
-  //     this.router.navigate (['profiles']);
-  //   }, (erreur) => {
-  //     console.log (erreur);
-  //   });
+  async onSubmit() {
+  const loading = await this.loadingCtrl.create({
+    message:'Please wait ...'
+  });
+  await loading.present();
+  this.transaction.addTransaction(this.formulaire.value) .subscribe (
+    async (data) => {
+     await  loading.dismiss();
+      const alert = await this.alertCtrl.create({
+        header: 'Succe',
+        cssClass: "my-custom-class",
+        message: "success",
+        buttons: ['OK']
+      });
+      await alert.present();
+    }, async (erreur) => {
+      await loading.dismiss();
+      const alert = await this.alertCtrl.create({
+        header: 'Failed',
+        cssClass: "my-custom-class",
+        message: erreur.error,
+        buttons: ['OK']
+      });
+      await alert.present();
+      console.log (erreur);
+    });
 }
 }

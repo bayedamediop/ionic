@@ -41,10 +41,10 @@
     </ion-row>
   </ion-card>
  
-  <form [formGroup]="formbenfiche" >
-    <div *ngIf="activeBeneficier" >
-  <!-- <ion-input type="hidden" required FormControlName="userDepotId" value="{{idUserConnected}}"></ion-input>
-  <ion-input type="hidden" required FormControlName="compteId" value="{{idCompte}}"></ion-input> -->
+  <form [formGroup]="formulaire" >
+    <div *ngIf="activeBeneficier" formGroupName="client_recu">
+   <!-- <ion-input type="hidden" required FormControlName="userDepotId" value="{{idUserConnected}}"></ion-input>
+   <ion-input type="hidden" required FormControlName="compteId" value="{{idCompte}}"></ion-input> -->
 
     <ion-row >
       <ion-col  size-sm="4" size-md="2" offset-sm="2">
@@ -64,21 +64,18 @@
     </ion-row>
  
 
-  <ion-row >
+   <ion-row >
     <ion-col  size-sm="4" size-md="2" offset-sm="2">
      
         <ion-button expand="black" class="ion-justify-content-end" type="submit" (click)="onSubmit()" >Terminer</ion-button>
    
     </ion-col>
   </ion-row>
-</div>
-</form>
-
-<form [formGroup]="formulaire" >
-  <div *ngIf="activeEmeteur" >
+ </div>
+  <div *ngIf="activeEmeteur"  >
     <!-- <ion-input type="hidden" required FormControlName="userDepotId" value="{{idUserConnected}}"></ion-input>
     <ion-input type="hidden" required FormControlName="compteId" value="{{idCompte}}"></ion-input> -->
-  
+    <section formGroupName="client">
     <ion-row >
       <ion-col  size-sm="4" size-md="2" offset-sm="2">
         <ion-item >
@@ -98,6 +95,7 @@
           </ion-item>
         </ion-col>
       </ion-row>
+      
       <ion-row >
         <ion-col  size-sm="">
           <ion-item >
@@ -106,6 +104,7 @@
           </ion-item>
         </ion-col>
       </ion-row>
+      </section>
    
     <ion-row >
       <ion-col  size-sm="">
@@ -119,7 +118,7 @@
       <ion-col  size-sm="">
         <ion-item >
           <ion-label position="floating">Frais</ion-label>
-          <ion-input type="text" required  formControlName="frais"></ion-input>
+          <ion-input type="text"  [disabled] ></ion-input>
                     <!-- <mdb-small *ngIf="nomCompletB.invalid && (nomCompletB.dirty || nomCompletB.touched)">Input invalid</mdb-small> -->
   
         </ion-item>
@@ -129,8 +128,7 @@
       <ion-col  size-sm="">
         <ion-item >
           <ion-label position="floating">Total</ion-label>
-          <ion-input type="text" required 
-           formControlName="total"></ion-input>
+          <ion-input type="text" [disabled] ></ion-input>
         </ion-item>
       </ion-col>
     </ion-row>
