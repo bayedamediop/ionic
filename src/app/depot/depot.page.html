@@ -23,96 +23,124 @@
  </ion-header>
  
 <ion-content>
+
+{{compteId}}
   <ion-card>
     <ion-row >
       <ion-col  size-sm="">
         <ion-segment ios (ionChange)="segmentChanged($event)">
-          <ion-segment-button value="beneficher">
-            <ion-label>Bénéficher</ion-label>
-          </ion-segment-button>
           <ion-segment-button value="emeteur">
             <ion-label>Emeteur</ion-label>
           </ion-segment-button>
+          <ion-segment-button value="beneficher">
+            <ion-label>Bénéficher</ion-label>
+          </ion-segment-button>
+         
         </ion-segment>
       </ion-col>
     </ion-row>
   </ion-card>
-  <div *ngIf="selected == 'beneficher'" >
+ 
+  <form [formGroup]="formbenfiche" >
+    <div *ngIf="activeBeneficier" >
+  <!-- <ion-input type="hidden" required FormControlName="userDepotId" value="{{idUserConnected}}"></ion-input>
+  <ion-input type="hidden" required FormControlName="compteId" value="{{idCompte}}"></ion-input> -->
+
     <ion-row >
       <ion-col  size-sm="4" size-md="2" offset-sm="2">
         <ion-item >
           <ion-label position="floating">NOM COMPLET</ion-label>
-          <ion-input type="text" required value="1750 2010 01823"></ion-input>
+          <ion-input type="text" required  formControlName="nomComplet"></ion-input>
         </ion-item>
       </ion-col>
     </ion-row>
     <ion-row >
-      <ion-col  size-sm="4" size-md="2" offset-sm="2">
+      <ion-col  size-sm="">
         <ion-item >
           <ion-label position="floating">TELEPHONE</ion-label>
-          <ion-input type="text" required value="1750 2010 01823"></ion-input>
+          <ion-input type="text" required  formControlName="phone"></ion-input>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+ 
+
+  <ion-row >
+    <ion-col  size-sm="4" size-md="2" offset-sm="2">
+     
+        <ion-button expand="black" class="ion-justify-content-end" type="submit" (click)="onSubmit()" >Terminer</ion-button>
+   
+    </ion-col>
+  </ion-row>
+</div>
+</form>
+
+<form [formGroup]="formulaire" >
+  <div *ngIf="activeEmeteur" >
+    <!-- <ion-input type="hidden" required FormControlName="userDepotId" value="{{idUserConnected}}"></ion-input>
+    <ion-input type="hidden" required FormControlName="compteId" value="{{idCompte}}"></ion-input> -->
+  
+    <ion-row >
+      <ion-col  size-sm="4" size-md="2" offset-sm="2">
+        <ion-item >
+          <ion-label position="floating">N° CNI</ion-label>
+          <ion-input type="text" required  formControlName="cni"></ion-input>
+        </ion-item>
+      </ion-col>
+    </ion-row >
+  
+      <ion-row >
+        <ion-col  size-sm="4" size-md="2" offset-sm="2">
+          <ion-item >
+            <ion-label position="floating">NOM COMPLET</ion-label>
+            <ion-input type="text" required  formControlName="nomComplet"></ion-input>
+            <!-- <ion-small *ngIf="nomComplet.invalid && (nomComplet.dirty || nomComplet.touched)">Input invalid</ion-small> -->
+
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row >
+        <ion-col  size-sm="">
+          <ion-item >
+            <ion-label position="floating">TELEPHONE</ion-label>
+            <ion-input type="text" required  formControlName="phone"></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+   
+    <ion-row >
+      <ion-col  size-sm="">
+        <ion-item >
+          <ion-label position="floating">Montant</ion-label>
+          <ion-input type="text" required  formControlName="montant"></ion-input>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-row >
+      <ion-col  size-sm="">
+        <ion-item >
+          <ion-label position="floating">Frais</ion-label>
+          <ion-input type="text" required  formControlName="frais"></ion-input>
+                    <!-- <mdb-small *ngIf="nomCompletB.invalid && (nomCompletB.dirty || nomCompletB.touched)">Input invalid</mdb-small> -->
+  
+        </ion-item>
+      </ion-col>
+    </ion-row>
+   <ion-row >
+      <ion-col  size-sm="">
+        <ion-item >
+          <ion-label position="floating">Total</ion-label>
+          <ion-input type="text" required 
+           formControlName="total"></ion-input>
         </ion-item>
       </ion-col>
     </ion-row>
     <ion-row >
       <ion-col  size-sm="4" size-md="2" offset-sm="2">
        
-          <ion-button class="btn">Envoyer</ion-button>
+          <ion-button expand="black" class="ion-justify-content-end" type="submit" (click)="suivant()" >Suivant</ion-button>
      
       </ion-col>
     </ion-row>
-</div>
-<div *ngIf="selected == 'emeteur'" >
-  <ion-row >
-    <ion-col  size-sm="4" size-md="2" offset-sm="2">
-      <ion-item >
-        <ion-label position="floating">N° CNI</ion-label>
-        <ion-input type="text" required value="1750 2010 01823"></ion-input>
-      </ion-item>
-    </ion-col>
-  </ion-row >
-
-    <ion-row >
-      <ion-col  size-sm="4" size-md="2" offset-sm="2">
-        <ion-item >
-          <ion-label position="floating">NOM COMPLET</ion-label>
-          <ion-input type="text" required value="1750 2010 01823"></ion-input>
-        </ion-item>
-      </ion-col>
-    </ion-row>
-    <ion-row >
-      <ion-col  size-sm="">
-        <ion-item >
-          <ion-label position="floating">TELEPHONE</ion-label>
-          <ion-input type="text" required value="1750 2010 01823"></ion-input>
-        </ion-item>
-      </ion-col>
-    </ion-row>
- 
-  <ion-row >
-    <ion-col  size-sm="">
-      <ion-item >
-        <ion-label position="floating">Montant</ion-label>
-        <ion-input type="text" required value="1750 2010 01823"></ion-input>
-      </ion-item>
-    </ion-col>
-  </ion-row>
-  <ion-row >
-    <ion-col  size-sm="">
-      <ion-item >
-        <ion-label position="floating">Frais</ion-label>
-        <ion-input type="text" required value="1750 2010 01823"></ion-input>
-      </ion-item>
-    </ion-col>
-  </ion-row>
-<ion-row >
-    <ion-col  size-sm="">
-      <ion-item >
-        <ion-label position="floating">Total</ion-label>
-        <ion-input type="text" required value="1750 2010 01823"></ion-input>
-      </ion-item>
-    </ion-col>
-  </ion-row>
-</div>
-
+  </div>
+  </form>
 </ion-content>
