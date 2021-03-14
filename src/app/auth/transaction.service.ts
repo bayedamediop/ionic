@@ -7,6 +7,7 @@ import { Transaction } from 'src/moddules/Transactions';
 })
 export class TransactionService {
   private url = 'http://127.0.0.1:8000/api/admin/transactions';
+  private urlf = 'http://127.0.0.1:8000/api/admin/frais'
   
  // private transaction: Transaction;
    constructor( private http: HttpClient) { }
@@ -16,4 +17,11 @@ export class TransactionService {
    addTransaction(transaction: Transaction): any {
      return this.http.post(`${this.url}`,transaction);
    }
+   getTransactionBycODE(code: number) {
+    return this.http.get(`${this.url}/${code}`);
+  }
+  calculefrais(montant: any){
+    return this.http.get(`${this.urlf}`,montant);
+
+  }
  }
