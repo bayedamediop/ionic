@@ -1,16 +1,149 @@
+<ion-header>
+  <ion-grid class="grid">
+ <ion-row>
+   <ion-col  size-sm="4" size-md="4" offset-sm="2">
 
+    <ion-icon [routerLink]="['/home']" name="home" style = "color:rgb(245, 109, 59); margin-top:40px">
+    </ion-icon>
+    </ion-col>
+   <ion-col size-sm="4" size-md="4" offset-sm="2">
+     <img class="monay" src="assets/min_logo.jpeg">
+   </ion-col>
+   <ion-col size-sm="4" size-md="4" offset-sm="2">
+   </ion-col>
+  </ion-row>
+ <ion-row>
+
+  <ion-col class="ion-text-center" size-sm="4" size-md="4">
+    <ion-icon class="ion-center" name="return-up-forward-outline" style = "color:rgb(245, 109, 59)"></ion-icon>
+    Dépot
+   </ion-col>
+ </ion-row>
+  </ion-grid>
+ </ion-header>
  
-  <ion-stepper #stepper (selectIndexChange)="selectChange($event)">
-    <ion-step label="Step1"
-              description="Step1 description">
-      <h2>Step1 Content</h2>
-      <p>Step1 Content</p>
-      <button ion-button small ionicStepperNext>Next</button>
-    </ion-step>
-    <ion-step label="Step2 - Step2 - Step2"
-              description="Step1 description">
-      <h2>Step2 Content</h2>
-      <p>Step2 Content</p>
-      <button ion-button color="light" small ionicStepperPrevious>Previous</button>
-    </ion-step>
-  </ion-stepper>
+<ion-content>
+  <ion-row >
+    <ion-col  size-sm="4" size-md="2" offset-sm="2">
+      <ion-item >
+        <ion-searchbar (ionChange)="ionChange($event)"></ion-searchbar>
+        </ion-item>
+    </ion-col>
+  </ion-row >
+  <ion-card>
+    <ion-row >
+      <ion-col  size-sm="">
+        <ion-segment ios (ionChange)="segmentChanged($event)">
+          <ion-segment-button value="emeteur">
+            <ion-label>Emeteur</ion-label>
+          </ion-segment-button>
+          <ion-segment-button value="beneficher">
+            <ion-label>Bénéficher</ion-label>
+          </ion-segment-button>
+         
+        </ion-segment>
+      </ion-col>
+    </ion-row>
+  </ion-card>
+ 
+  <form [formGroup]="formulaire" >
+    <div *ngIf="activeBeneficier" formGroupName="client_recu">
+   <!-- <ion-input type="hidden" required FormControlName="userDepotId" value="{{idUserConnected}}"></ion-input>
+   <ion-input type="hidden" required FormControlName="compteId" value="{{idCompte}}"></ion-input> -->
+
+    <ion-row >
+      <ion-col  size-sm="4" size-md="2" offset-sm="2">
+        <ion-item >
+          <ion-label position="floating">NOM COMPLET</ion-label>
+          <ion-input type="text" ></ion-input>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-row >
+      <ion-col  size-sm="">
+        <ion-item >
+          <ion-label position="floating">TELEPHONE</ion-label>
+          <ion-input type="text" ></ion-input>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+ 
+
+   <ion-row >
+    <ion-col  size-sm="4" size-md="2" offset-sm="2">
+     
+        <ion-button expand="black" class="ion-justify-content-end" type="submit" (click)="onSubmit()" >Terminer</ion-button>
+   
+    </ion-col>
+  </ion-row>
+ </div>
+  <div *ngIf="activeEmeteur"  >
+    <!-- <ion-input type="hidden" required FormControlName="userDepotId" value="{{idUserConnected}}"></ion-input>
+    <ion-input type="hidden" required FormControlName="compteId" value="{{idCompte}}"></ion-input> -->
+    <section formGroupName="client">
+    <ion-row >
+      <ion-col  size-sm="4" size-md="2" offset-sm="2">
+        <ion-item >
+          <ion-label position="floating">N° CNI</ion-label>
+          <ion-input type="text" ></ion-input>
+        </ion-item>
+      </ion-col>
+    </ion-row >
+  
+      <ion-row >
+        <ion-col  size-sm="4" size-md="2" offset-sm="2">
+          <ion-item >
+            <ion-label position="floating">NOM COMPLET</ion-label>
+            <ion-input type="text" ></ion-input>
+            <!-- <ion-small *ngIf="nomComplet.invalid && (nomComplet.dirty || nomComplet.touched)">Input invalid</ion-small> -->
+
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      
+      <ion-row >
+        <ion-col  size-sm="">
+          <ion-item >
+            <ion-label position="floating">TELEPHONE</ion-label>
+            <ion-input type="text" ></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      </section>
+   
+    <ion-row >
+      <ion-col  size-sm="">
+        <ion-item >
+          <ion-label position="floating">Montant</ion-label>
+          <ion-input type="text" ></ion-input>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-row >
+      <ion-col  size-sm="">
+        <ion-item >
+          <ion-label position="floating">Frais</ion-label>
+          <ion-input type="text"  [disabled] ></ion-input>
+                    <!-- <mdb-small *ngIf="nomCompletB.invalid && (nomCompletB.dirty || nomCompletB.touched)">Input invalid</mdb-small> -->
+  
+        </ion-item>
+      </ion-col>
+    </ion-row>
+   <ion-row >
+      <ion-col  size-sm="">
+        <ion-item >
+          <ion-label position="floating">Total</ion-label>
+          <ion-input type="text" [disabled] ></ion-input>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-row >
+      <ion-col  size-sm="4" size-md="2" offset-sm="2">
+       
+          <ion-button expand="block" class="ion-justify-content-end" type="submit" (click)="suivant()" >Suivant</ion-button>
+     
+      </ion-col>
+    </ion-row>
+  </div>
+  </form>
+</ion-content>

@@ -48,40 +48,6 @@ export class DepotPage implements OnInit {
   frai: any;
   helper = new JwtHelperService(); ;
  ngOnInit(): void {
-
-   this.frai= this.authService.getAllfrais()
-   this.frai.forEach(element => {
-     console.log(element[0]['id']);
-     
-     
-   });
-    this.token = this.authService.getToken() ;
-    const tokenDecoded = this.helper.decodeToken(this.token);
-   // console.log(tokenDecoded);
-    this.nameUserConnected = tokenDecoded.username;
-    // console.log(this.nameUserConnected);
-    this.userService.getAllUsers().subscribe(data => {
-      this.users = data;
-     //console.log(this.users);
-      
-      this.users.forEach((element: any) => {
-        if (element.email === this.nameUserConnected) {
-           // console.log(element.id);
-            element['transactions'].forEach((element: any) => {
-              this.idCompte=(element['copmte'].id);
-              this.solde=(element['copmte'].solde);
-             // console.log(this.solde);
-
-            }),
-            //console.log(element['transactions'][0]);
-           this.idUserConnected = element.id;
-           //console.log(this.idUserConnected);
-           
-         // console.log(this.idCompte);
-        }
-      }) ;
-    });
-    // const tokenDecoded = this.helper.decodeToken(response.token) ;
   }
 
   formulaire = new FormGroup({
@@ -109,27 +75,55 @@ export class DepotPage implements OnInit {
   const loading = await this.loadingCtrl.create({
     message:'Please wait ...'
   });
-  await loading.present();
-  this.transaction.addTransaction(this.formulaire.value) .subscribe (
-    async (data) => {
-     await  loading.dismiss();
-      const alert = await this.alertCtrl.create({
-        header: 'Succe',
-        cssClass: "my-custom-class",
-        message: "success",
-        buttons: ['OK']
-      });
-      await alert.present();
-    }, async (erreur) => {
-      await loading.dismiss();
-      const alert = await this.alertCtrl.create({
-        header: 'Failed',
-        cssClass: "my-custom-class",
-        message: erreur.error,
-        buttons: ['OK']
-      });
-      await alert.present();
-      console.log (erreur);
-    });
+  //console.log('oji');
+  
+  const alert = await this.alertCtrl.create({
+          cssClass: "my-custom-class",
+          message: "Vous Voullez faire une transaction de ",
+          inputs: [
+            {type: "text", value: this.formulaire.value.montant},
+            {type: "text", value: this.formulaire.value.client_recu.nomComplet},
+  
+          ],
+          buttons: [
+            {
+              text: 'Cancel',
+              handler: () =>{
+                buttons: ['OK']
+              }
+          }, 
+          {
+            text: 'Confirmer',
+            handler: () =>{
+              //await loading.present();
+              this.transaction.addTransaction(this.formulaire.value) .subscribe (
+                async (data) => {
+                 await  loading.dismiss();
+                  const alert = await this.alertCtrl.create({
+                    header: 'Succe',
+                    cssClass: "my-custom-class",
+                    message: "Success!! ",
+                    buttons: ['OK']
+              
+                  });
+                  await alert.present();
+                }, async (erreur) => {
+                  await loading.dismiss();
+                  const alert = await this.alertCtrl.create({
+                    header: 'Failed',
+                    cssClass: "my-custom-class",
+                    message: erreur.error,
+                    buttons: ['OK']
+                  });
+                  await alert.present();
+                  console.log (erreur);
+                });
+            }
+          }
+        ]
+        });
+        await alert.present();
+
+
 }
 }
