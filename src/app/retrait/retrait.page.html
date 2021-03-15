@@ -21,17 +21,31 @@
  </ion-row>
   </ion-grid>
  </ion-header>
- 
+
 <ion-content>
+  <div *ngIf="activeCode">
   <form [formGroup]="recherge">
-  <ion-row >
+    <h3 class="ion-text-center">Retrait une Transaction </h3>
+    <br>
+    <p style="color:red; font-size:16px">{{errorMessage}}</p>
+    <br>
+    <ion-row >
     <ion-col  size-sm="4" size-md="2" offset-sm="2">
       <ion-item >
-        <ion-input type="number" (click)="recherger()" formControlName="code" ></ion-input>
+        <ion-input type="number"  placeholder="Entre la code transaction" formControlName="code" ></ion-input>
         </ion-item>
     </ion-col>
   </ion-row >
-</form>
+    <ion-row >
+      <ion-col  size-sm="4" size-md="2" offset-sm="2">
+
+          <ion-button [disabled]="recherge.invalid" type="submit" expand="block" class="ion-justify-content ion-justify-top:0px"side="start" (click)="recherger()" > Rechercher</ion-button>
+
+      </ion-col>
+    </ion-row >
+  </form>
+  </div>
+  <div *ngIf="activeFormulaires">
   <ion-card>
     <ion-row >
       <ion-col  size-sm="">
@@ -42,27 +56,26 @@
           <ion-segment-button value="beneficher">
             <ion-label>Bénéficher</ion-label>
           </ion-segment-button>
-         
+
         </ion-segment>
       </ion-col>
     </ion-row>
   </ion-card>
-  <ion-content>
-    <ion-list padding *ngFor="let item of transaction">
-        <ion-item (click)="viewItem(item)">
-          {{item.montant}}
-           
-        </ion-item>
-    </ion-list>
-  </ion-content>
-  <form  >
+  <form [formGroup]="formTerminer" >
     <div *ngIf="activeBeneficier">
-   
+      <ion-row >
+        <ion-col  size-sm="4" size-md="2" offset-sm="2">
+          <ion-item >
+            <ion-label position="floating">N° CNI</ion-label>
+            <ion-input type="text" FormControlName="cni"></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row >
     <ion-row >
       <ion-col  size-sm="4" size-md="2" offset-sm="2">
         <ion-item >
           <ion-label position="floating">NOM COMPLET</ion-label>
-          <ion-input type="text" required  value=""></ion-input>
+          <ion-input type="text" required  value="{{client_recu?.nomComplet}}"></ion-input>
         </ion-item>
       </ion-col>
     </ion-row>
@@ -70,71 +83,71 @@
       <ion-col  size-sm="">
         <ion-item >
           <ion-label position="floating">TELEPHONE</ion-label>
-          <ion-input type="text" ></ion-input>
+          <ion-input type="text" value="{{client_recu?.phone}}"></ion-input>
         </ion-item>
       </ion-col>
     </ion-row>
- 
+
 
    <ion-row >
     <ion-col  size-sm="4" size-md="2" offset-sm="2">
-     
-        <ion-button expand="block" class="ion-justify-content " type="submit" (click)="onSubmit()" >Terminer</ion-button>
-   
+
+        <ion-button expand="block"  class="ion-justify-content " type="submit" (click)="onSubmit()" >Terminer</ion-button>
+
     </ion-col>
   </ion-row>
 </div>
 <div >
   <div *ngIf="activeEmeteur"  >
-    
+
     <ion-row >
       <ion-col  size-sm="4" size-md="2" offset-sm="2">
         <ion-item >
           <ion-label position="floating">N° CNI</ion-label>
-          <ion-input type="text" value=""></ion-input>
+          <ion-input type="text" value="{{clientEnvoie?.cni}}"></ion-input>
         </ion-item>
       </ion-col>
     </ion-row >
-  
+
       <ion-row >
         <ion-col  size-sm="4" size-md="2" offset-sm="2">
           <ion-item >
             <ion-label position="floating">NOM COMPLET</ion-label>
-            <ion-input type="text" required ></ion-input>
+            <ion-input type="text" required value="{{clientEnvoie?.nomComplet}}" ></ion-input>
             <!-- <ion-small *ngIf="nomComplet.invalid && (nomComplet.dirty || nomComplet.touched)">Input invalid</ion-small> -->
 
           </ion-item>
         </ion-col>
       </ion-row>
-      
+
       <ion-row >
         <ion-col  size-sm="">
           <ion-item >
             <ion-label position="floating">TELEPHONE</ion-label>
-            <ion-input type="text" ></ion-input>
+            <ion-input type="text" value="{{clientEnvoie?.phone}}" ></ion-input>
           </ion-item>
         </ion-col>
       </ion-row>
-      
-   
+
+
     <ion-row >
       <ion-col  size-sm="">
         <ion-item >
           <ion-label position="floating">Montant</ion-label>
-          <ion-input type="text" ></ion-input>
+          <ion-input type="text" value="{{transaction?.montant}}"></ion-input>
         </ion-item>
       </ion-col>
     </ion-row>
     <ion-row >
       <ion-col  size-sm="4" size-md="2" offset-sm="2">
-       
+
           <ion-button expand="block" shop="round" class="ion-justify-content-end" type="submit" (click)="suivant()" >Suivant</ion-button>
-     
+
       </ion-col>
     </ion-row>
   </div>
 </div>
 
   </form>
-
+  </div>
 </ion-content>

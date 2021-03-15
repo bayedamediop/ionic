@@ -8,7 +8,7 @@ import { Transaction } from 'src/moddules/Transactions';
 export class TransactionService {
   private url = 'http://127.0.0.1:8000/api/admin/transactions';
   private urlf = 'http://127.0.0.1:8000/api/admin/frais'
-  
+
  // private transaction: Transaction;
    constructor( private http: HttpClient) { }
    getAllUsers(){
@@ -23,5 +23,8 @@ export class TransactionService {
   calculefrais(montant: any){
     return this.http.get(`${this.urlf}`,montant);
 
+  }
+  retrait(code: number,client: any){
+  return this.http.put(`${this.url}/${code}`,client);
   }
  }

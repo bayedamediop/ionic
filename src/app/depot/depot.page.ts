@@ -63,13 +63,7 @@ export class DepotPage implements OnInit {
     
  });
 
-  frais(montant: any) {
-    const frais = this.authService.getAllfrais()
-    frais.forEach(element => {
-     
-      
-    });
-  }
+  
  
   async onSubmit() {
   const loading = await this.loadingCtrl.create({
