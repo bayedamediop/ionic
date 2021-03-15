@@ -9,16 +9,18 @@ import { TransactionService } from '../auth/transaction.service';
 })
 export class FraisPage implements OnInit {
 frais : any;
-  constructor(private auth: TransactionService) { }
+  constructor(private authService: TransactionService) { }
   forms = new FormGroup({
     montant: new FormControl('',[Validators.required])
   })
   ngOnInit() {
   }
   calculator (){
-   this.auth.calculefrais(this.forms.value).subscribe(data => {
-     this.frais = data
+    console.log(this.forms.value.montant);
+   this.authService.calculefrais("12233").subscribe(data => {
+     console.log(data);
+
    })
-   
-  } 
+
+  }
 }

@@ -11,14 +11,16 @@
 <br>
 
 <ion-content>
-  
+  <div class="ion-" *ngIf="fakeAuth">
+    <strong>Alert!</strong> Login ou mot de passe incorrecte!!!!
+  </div>
   <ion-grid>
-      <form [formGroup]="formulaire" (submit)="onSubmit()">
+      <form [formGroup]="formLogin" (submit)="onSubmit()">
       <ion-row>
         <ion-col size-sm="6" size-md="4" offset-sm="3">
           <ion-item>
             <ion-label style="font-size:20px" position="floating">Username</ion-label>
-            <ion-input  type="text" required formControlName="email" ></ion-input>
+            <ion-input  type="text" [(ngModel)]="email" required formControlName="email" ></ion-input>
           </ion-item>
         </ion-col>
       </ion-row>
@@ -26,7 +28,7 @@
         <ion-col size-sm="6" size-md="4" offset-sm="3">
           <ion-item>
             <ion-label style="font-size:20px" position="floating">Password</ion-label>
-            <ion-input  type="password" required formControlName="password"></ion-input>
+            <ion-input  type="password" [(ngModel)]="password" required formControlName="password"></ion-input>
           </ion-item>
         </ion-col>
       </ion-row>
