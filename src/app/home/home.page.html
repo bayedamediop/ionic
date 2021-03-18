@@ -1,9 +1,9 @@
 <ion-header>
- 
+
  <ion-grid class="grid" >
 <ion-row>
   <ion-col  class="hamburger haut" size-sm="4" size-md="2" offset-sm="2">
-    
+
         <ion-menu-button menu="main-menu"></ion-menu-button>
   </ion-col>
   <ion-col size-sm="4" size-md="4" offset-sm="2">
@@ -15,7 +15,7 @@
 </ion-row>
  </ion-grid>
  <ion-card class="card">
- <ion-grid >  
+ <ion-grid >
   <ion-row>
     <ion-col  size-sm="4" size-md="2" offset-sm="2">
       Mon solde disponible
@@ -61,11 +61,21 @@
             <ion-col  size-sm="6" size-md="4" offset-sm="2">
               <ion-menu-toggle auto-hide="false">
                 <ion-item button>
-                  <ion-icon name="sync-outline" style = "color:rgb(245, 109, 59)"></ion-icon>
-                 <ion-label [routerLink]="['/transaction']"> Mes transactions </ion-label >
+                  <ion-icon> name="repeat-outline" style = "color:rgb(245, 109, 59)"></ion-icon>
+                 <ion-label [routerLink]="['/mes-transaction']"> Mes transactions </ion-label >
              </ion-item>
               </ion-menu-toggle>
-            </ion-col> 
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col  size-sm="6" size-md="4" offset-sm="2">
+              <ion-menu-toggle auto-hide="false">
+                <ion-item button>
+                  <ion-icon name="sync-outline" style = "color:rgb(245, 109, 59)"></ion-icon>
+                  <ion-label [routerLink]="['/toutes-mes-transaction']"> Toutes Mes Transactions </ion-label >
+                </ion-item>
+              </ion-menu-toggle>
+            </ion-col>
           </ion-row>
         <ion-row>
             <ion-col  size-sm="6" size-md="4" offset-sm="2">
@@ -75,8 +85,7 @@
                   <ion-label [routerLink]="['/tabs/frais']"> Calculateur de rfais </ion-label >
                   </ion-item>
               </ion-menu-toggle>
-            </ion-col>     
+            </ion-col>
           </ion-row>
         </ion-grid>
       </ion-content>
-  

@@ -8,18 +8,20 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Interceptor } from 'src/__helper/Interceptor';
+import {LodinGuard} from "./guard/LodinGuard";
 
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
   imports: [
-    BrowserModule, 
+    BrowserModule,
     FormsModule,
     ReactiveFormsModule,
     IonicModule.forRoot(),
      AppRoutingModule,
       HttpClientModule],
-  providers: [{provide: HTTP_INTERCEPTORS, useClass: Interceptor, multi: true}],
+  providers: [{provide: HTTP_INTERCEPTORS, useClass: Interceptor, multi: true},
+  LodinGuard],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

@@ -23,32 +23,26 @@ export class HomePage implements OnInit {
   photoExist = false;
   solde: string;
   users: any;
-  helper = new JwtHelperService(); ;
+  helper = new JwtHelperService();
 
   ngOnInit(): void {
     this.token = this.authservice.getToken() ;
     const tokenDecoded = this.helper.decodeToken(this.token);
-   // console.log(tokenDecoded);
+     // console.log(tokenDecoded);
     this.nameUserConnected = tokenDecoded.username;
     // console.log(this.nameUserConnected);
     this.userService.getAllUsers().subscribe(data => {
       this.users = data;
      //console.log(this.users);
-      
+
       this.users.forEach((element: any) => {
         if (element.email === this.nameUserConnected) {
-            //console.log(element);
-            element['transactions'].forEach((element: any) => {
-              this.solde=(element['copmte'].solde);
-              //console.log(this.solde);
-
-            }),
-            //console.log(element['transactions'][0]);
+            this.solde=(element['agences'][0]['compte'].solde);
            this.idUserConnected = element.id;
            this.nom = element.nom;
            this.prenom = element.prenom;
            //this.user = element.transaction;
-          console.log(this.solde);
+          //console.log(this.solde);
            if (element.avatar != null) {
             this.imageUser = element.avatar;
             this.photoExist = true;

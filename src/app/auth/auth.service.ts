@@ -57,4 +57,5 @@ export class AuthService {
   getAllfrais() {
     return this.http.get(`${this.url}/admin/tarifs`)
   }
+ 
 }

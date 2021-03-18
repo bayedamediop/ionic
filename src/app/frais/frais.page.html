@@ -21,25 +21,37 @@
  </ion-row>
   </ion-grid>
  </ion-header>
- 
+
 <ion-content>
   <form [formGroup]="forms">
-  <ion-row >
-    <ion-col  size-sm="">
-      <ion-item >
-        <ion-label position="floating">Montant</ion-label>
-        <ion-input type="text" required  formControlName="montant"></ion-input>
+    <p class="ion-align-items-center"></p>
+    <ion-card class="">
+  <ion-row  class="ion-no-border">
+    <ion-col class="ion-text-center" size-sm="4" size-md="2">
+      <ion-title size="large">Entre la somme  à calculer</ion-title>
+      <ion-item class="ion-padding-bottom" >
+        <ion-input  type="number"  required  formControlName="montant"></ion-input>
       </ion-item>
     </ion-col>
   </ion-row>
+    </ion-card>
   <ion-row >
-    <ion-col  size-sm="">
-      <ion-item >
-        <ion-label position="floating">frais</ion-label>
-        <ion-input type="[disabled]" required value=""></ion-input>
-      </ion-item>
-    </ion-col>
+
   </ion-row>
-  <ion-button type="submit" (click)="calculator()">Calculer</ion-button>
+  <ion-button type="submit" slot="bottom" shape="round" expand="block" (click)="calculator()">Calculer</ion-button>
 </form>
 </ion-content>
+<script>
+  const button = document.querySelector('ion-button');
+  button.addEventListener('click', handleButtonClick);
+
+  async function handleButtonClick() {
+    const alert = await alertController.create({
+      header: 'Use this lightsaber?',
+      message: 'Do you agree to use this lightsaber to do good across the galaxy?',
+      buttons: ['Disagree', 'Agree']
+    });
+
+    await alert.present();
+  }
+</script>

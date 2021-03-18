@@ -11,10 +11,10 @@ import { AlertController, LoadingController } from '@ionic/angular';
   styleUrls: ['./retrait.page.scss'],
 })
 export class RetraitPage implements OnInit {
-  private activeBeneficier = false;
-  private activeEmeteur = true;
-  private activeCode = true;
-  private activeFormulaires = false;
+  activeBeneficier = false;
+  activeEmeteur = true;
+  activeCode = true;
+  activeFormulaires = false;
   user = null;
   errorMessage: any;
   transaction: any;
@@ -67,23 +67,23 @@ formTerminer = new FormGroup({
     cni: new FormControl('',[Validators.required])
   })
   async onSubmit() {
-      
+
        const loading = await this.loadingCtrl.create({
         message:'Please wait ...'
       });
       //console.log('oji');
-      
+
       const alert = await this.alertCtrl.create({
               cssClass: "my-custom-class",
               message: "Vous Voullez retiret cete transaction ",
-             
+
               buttons: [
                 {
                   text: 'Cancel',
                   handler: () =>{
                     buttons: ['OK']
                   }
-              }, 
+              },
               {
                 text: 'Confirmer',
                 handler: () =>{
@@ -96,7 +96,7 @@ formTerminer = new FormGroup({
                         cssClass: "my-custom-class",
                         message: "Success!! ",
                         buttons: ['OK']
-                  
+
                       });
                       await alert.present();
                     }, async (erreur) => {
@@ -115,7 +115,7 @@ formTerminer = new FormGroup({
             ]
             });
             await alert.present();
-    
-    
+
+
     }
 }
