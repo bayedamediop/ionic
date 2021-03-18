@@ -13,7 +13,14 @@ export class UserService {
     return this.http.get(this.url)
   }
   addUser(user: User): any {
-    return this.http.post(`${this.url}}`,user);
+    return this.http.post(`${this.url}`,user);
+  }
+  getUserById(id: number): any {
+    return this.http.get(`${this.url}/${id}`);
+  }
+
+  update(id: number, users: FormData): any {
+    return this.http.put(`${this.url}/${id}`,users);
   }
 }
 

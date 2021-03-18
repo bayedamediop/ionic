@@ -4,7 +4,7 @@
     <ion-img src="assets/money_logo.png">
     </ion-img>
     <p class="ion-font-size-x ion-text-center" style="font-size:30px">Login
-      
+
     </p>
     <hr style="color:aquamarine">
   </ion-card>
@@ -22,6 +22,12 @@
             <ion-label style="font-size:20px" position="floating">Username</ion-label>
             <ion-input  type="text" [(ngModel)]="email" required formControlName="email" ></ion-input>
           </ion-item>
+          <span class="error ion-padding" *ngIf="isSubmitted && errorControl.email.errors?.required">
+      Email is required.
+    </span>
+          <span class="error ion-padding" *ngIf="isSubmitted && errorControl.email.errors?.pattern">
+      Please provide valid email id.
+    </span>
         </ion-col>
       </ion-row>
       <ion-row>
@@ -34,9 +40,9 @@
       </ion-row>
       <ion-row>
         <ion-col size-sm="6" size-md="4" offset-sm="3">
-    
+
            <p class="ion-text-center " style="color:aquamarine">Mot de passe oublier?</p>
-      
+
         </ion-col>
       </ion-row>
       <ion-row>

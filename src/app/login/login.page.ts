@@ -6,7 +6,7 @@ import { Router } from '@angular/router';
 import { AlertController, LoadingController, ToastController } from '@ionic/angular';
 import { AuthService } from '../auth/auth.service';
 
-@Injectable({ 
+@Injectable({
   providedIn: 'any'
 })
 @Component({
@@ -20,21 +20,25 @@ export class LoginPage {
   formLogin: FormGroup;
   fakeAuth = false;
   submitted = false;
+  isSubmitted = false;
   private token: string;
   constructor( private authService: AuthService, private route: Router,  private formBuilder: FormBuilder,
   ) {
   }
   ngOnInit(): any{
     this.formLogin = this.formBuilder.group({
-      email: ['', [ Validators.required, Validators.email]],
+      email: ['', [Validators.required, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$')]],
       password: ['', [ Validators.required, Validators.minLength(4)]]
     });
+  }
+  get errorControl() {
+    return this.formLogin.controls;
   }
   get f(): any{
     return this.formLogin.controls ;
   }
   onSubmit(): any {
-    this.submitted = true;
+    this.isSubmitted = true;
     if (this.formLogin.invalid) {
       return;
     }

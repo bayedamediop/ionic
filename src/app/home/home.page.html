@@ -1,16 +1,16 @@
-<ion-header>
+<ion-header   >
 
- <ion-grid class="grid" >
+ <ion-grid  >
 <ion-row>
   <ion-col  class="hamburger haut" size-sm="4" size-md="2" offset-sm="2">
 
         <ion-menu-button menu="main-menu"></ion-menu-button>
   </ion-col>
-  <ion-col size-sm="4" size-md="4" offset-sm="2">
+  <ion-col size-sm="4" size-md="2" offset-sm="2">
     <img class="monay" src="assets/min_logo.jpeg">
  </ion-col>
- <ion-col size-sm="4" size-md="4" offset-sm="2">
-  <img class="user" side="start" src="data:image/jpeg;base64,{{imageUser}}">
+ <ion-col size-sm="4" size-md="2" offset-sm="2">
+  <img class="user" [routerLink]="['/paramettere']" side="start" src="data:image/jpeg;base64,{{imageUser}}">
 </ion-col>
 </ion-row>
  </ion-grid>
@@ -35,10 +35,10 @@
   </ion-card>
 </ion-header>
 
-<ion-content>
+<ion-content >
         <ion-grid>
           <ion-row>
-            <ion-col  size-sm="4" size-md="8" offset-sm="2">
+            <ion-col  size-sm="4" size-md="4" offset-sm="2">
               <ion-menu-toggle auto-hide="false">
                 <ion-item button>
                   <ion-icon name="return-up-forward-outline" style = "color:rgb(245, 109, 59)"></ion-icon>
@@ -48,7 +48,7 @@
             </ion-col>
           </ion-row>
           <ion-row>
-            <ion-col  size-sm="8" size-md="8" offset-sm="2">
+            <ion-col  size-sm="4" size-md="4" offset-sm="2">
               <ion-menu-toggle auto-hide="false">
                 <ion-item button>
                   <ion-icon name="return-up-back-outline" style = "color:rgb(245, 109, 59)"></ion-icon>
@@ -58,7 +58,7 @@
             </ion-col>
           </ion-row>
           <ion-row>
-            <ion-col  size-sm="6" size-md="4" offset-sm="2">
+            <ion-col  size-sm="4" size-md="4" offset-sm="2">
               <ion-menu-toggle auto-hide="false">
                 <ion-item button>
                   <ion-icon> name="repeat-outline" style = "color:rgb(245, 109, 59)"></ion-icon>
@@ -68,7 +68,7 @@
             </ion-col>
           </ion-row>
           <ion-row>
-            <ion-col  size-sm="6" size-md="4" offset-sm="2">
+            <ion-col  size-sm="4" size-md="4" offset-sm="2">
               <ion-menu-toggle auto-hide="false">
                 <ion-item button>
                   <ion-icon name="sync-outline" style = "color:rgb(245, 109, 59)"></ion-icon>
@@ -78,7 +78,7 @@
             </ion-col>
           </ion-row>
         <ion-row>
-            <ion-col  size-sm="6" size-md="4" offset-sm="2">
+            <ion-col  size-sm="4" size-md="4" offset-sm="2">
               <ion-menu-toggle auto-hide="false">
                 <ion-item button>
                   <ion-icon name="calculator-outline" style = "color:rgb(245, 109, 59)"></ion-icon>

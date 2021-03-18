@@ -28,7 +28,8 @@ export class HomePage implements OnInit {
   ngOnInit(): void {
     this.token = this.authservice.getToken() ;
     const tokenDecoded = this.helper.decodeToken(this.token);
-     // console.log(tokenDecoded);
+    this.idUserConnected = tokenDecoded.id;
+     //console.log(this.idUserConnected);
     this.nameUserConnected = tokenDecoded.username;
     // console.log(this.nameUserConnected);
     this.userService.getAllUsers().subscribe(data => {
@@ -38,7 +39,8 @@ export class HomePage implements OnInit {
       this.users.forEach((element: any) => {
         if (element.email === this.nameUserConnected) {
             this.solde=(element['agences'][0]['compte'].solde);
-           this.idUserConnected = element.id;
+
+          //console.log(this.idUserConnected),
            this.nom = element.nom;
            this.prenom = element.prenom;
            //this.user = element.transaction;

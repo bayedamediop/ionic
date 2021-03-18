@@ -6,6 +6,7 @@ import { AuthService } from '../auth/auth.service';
 import { TransactionService } from '../auth/transaction.service';
 import { UserService } from '../auth/user.service';
 
+
 @Component({
   selector: 'app-depot',
   templateUrl: './depot.page.html',
@@ -13,92 +14,119 @@ import { UserService } from '../auth/user.service';
 })
 export class DepotPage implements OnInit {
   private selected : string = 'emeteur';
-  private activeBeneficier = false;
-  private activeEmeteur = true;
+  activeBeneficier = false;
+  activeEmeteur = true;
   user = null;
   segmentChanged(ev: any) {
    if (ev.detail.value == 'beneficher'){
               this.activeBeneficier = true;
               this.activeEmeteur = false;
               console.log('Beneficier');
-              
+
    }else{
      this.activeBeneficier = false;
      this.activeEmeteur=true;
      console.log('emeteur');
-     
+
    }
   }
   suivant(){
+    this.isSubmitted = true;
     this.activeBeneficier = true;
     this.activeEmeteur = false;
   }
-  constructor( private authService: AuthService , 
+  constructor( private authService: AuthService ,
     private fb: FormBuilder, private userService: UserService,
     private loadingCtrl: LoadingController,
-    private transaction: TransactionService, private alertCtrl: AlertController) { }
+    private transaction: TransactionService,
+               private alertCtrl: AlertController) { }
   token: any;
   nameUserConnected: string;
+  isSubmitted = false;
   nom: string;
   prenom: string;
   idUserConnected: any;
   idCompte: any;
+  frair: any;
+  motanaTotal: any;
   users: any;
   solde: any;
-  frai: any;
-  helper = new JwtHelperService(); ;
+  frais: any;
+  helper = new JwtHelperService();
+  montant= '';
  ngOnInit(): void {
+
+ }
+
+  calculer($event: KeyboardEvent){
+   const sommeMontant = {montant: Number( this.montant)}
+   //console.log(sommeMontant);
+   //console.log(this.transaction.frais(this.formulaire.value.montant))
+   this.transaction.frais(sommeMontant).subscribe( data =>{
+     this.frais = data;
+    this.motanaTotal = +this.frais + (+Number( this.montant));
+    // console.log(this.frais)
+    // console.log(this.motanaTotal)
+   })
+ }
+  get errorControl() {
+    return this.formulaire.controls;
   }
 
   formulaire = new FormGroup({
-    client: new FormGroup({ cni: new FormControl('1750 2010 039746',[Validators.required]),
-    nomComplet: new FormControl('lo ndaye',[Validators.required]) ,
-    phone: new FormControl('775657642',[Validators.required])
+    client: new FormGroup({ cni: new FormControl('',
+        [Validators.pattern('^[0-9]+$'),Validators.required]),
+    nomComplet: new FormControl('',[Validators.required]) ,
+    phone: new FormControl('', [Validators.required, Validators.pattern('^[0-9]+$')])
    }),
-   client_recu: new FormGroup({ 
-    nomComplet: new FormControl('lo fatou',[Validators.required]) ,
-    phone: new FormControl('764553709',[Validators.required]) ,
+   client_recu: new FormGroup({
+    nomComplet: new FormControl('',[Validators.required]) ,
+    phone: new FormControl('', [Validators.required, Validators.pattern('^[0-9]+$')]) ,
    }),
-    montant: new FormControl(10000,[Validators.required]),
-    
- });
+    montant: new FormControl('',[Validators.required]),
 
-  
- 
+ });
+  private EMETTEUR: string
+
   async onSubmit() {
+    this.isSubmitted = true;
   const loading = await this.loadingCtrl.create({
     message:'Please wait ...'
   });
-  //console.log('oji');
-  
+    //await alert.present();
+
   const alert = await this.alertCtrl.create({
           cssClass: "my-custom-class",
-          message: "Vous Voullez faire une transaction de ",
-          inputs: [
-            {type: "text", value: this.formulaire.value.montant},
-            {type: "text", value: this.formulaire.value.client_recu.nomComplet},
-  
-          ],
+          header: `<div>Cofirmation</div>`,
+          message: `<div style="width: 300px; border-radius: 40%">EMETTEUR <br> NomCpmlet <strong>${this.formulaire.value.client.nomComplet}</strong><br>
+                                N°CNI  <strong>${this.formulaire.value.client.cni}</strong><br>
+                                N°CNI  <strong>${this.formulaire.value.client.phone}</strong><br>
+                            <br>
+                        RECEPTTEUR <br> NomCpmlet <strong>${this.formulaire.value.client_recu.nomComplet}</strong><br>
+
+                                N°CNI  <strong>${this.formulaire.value.client_recu.phone}</strong><br>
+                              MONTANT ENVOIYER <br><H1>${this.formulaire.value.montant}</H1><br></div>`
+                ,
           buttons: [
             {
               text: 'Cancel',
               handler: () =>{
                 buttons: ['OK']
               }
-          }, 
+          },
           {
             text: 'Confirmer',
-            handler: () =>{
-              //await loading.present();
-              this.transaction.addTransaction(this.formulaire.value) .subscribe (
+            handler: async () => {
+              await alert.present();
+              this.transaction.addTransaction(this.formulaire.value).subscribe(
                 async (data) => {
-                 await  loading.dismiss();
+                  await loading.dismiss();
                   const alert = await this.alertCtrl.create({
                     header: 'Succe',
                     cssClass: "my-custom-class",
                     message: "Success!! ",
                     buttons: ['OK']
-              
+
                   });
                   await alert.present();
                 }, async (erreur) => {
@@ -110,7 +138,7 @@ export class DepotPage implements OnInit {
                     buttons: ['OK']
                   });
                   await alert.present();
-                  console.log (erreur);
+                  console.log(erreur);
                 });
             }
           }

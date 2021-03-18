@@ -41,6 +41,10 @@ const routes: Routes = [
   {
     path: 'toutes-mes-transaction',
     loadChildren: () => import('./toutes-mes-transaction/toutes-mes-transaction.module').then( m => m.ToutesMesTransactionPageModule)
+  },
+  {
+    path: 'paramettere',
+    loadChildren: () => import('./paramettere/paramettere.module').then( m => m.ParametterePageModule)
   }
 ];
 @NgModule({

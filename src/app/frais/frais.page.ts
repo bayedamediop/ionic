@@ -19,7 +19,7 @@ frais : any;
   }
   async calculator (){
 
-    console.log(this.forms.value);
+    //console.log(this.forms.value);
    this.authService.frais(this.forms.value).subscribe(async data => {
      this.frais = data
        const alert = await this.alertController.create({
