@@ -25,7 +25,7 @@
 <ion-content>
   <div *ngIf="activeCode">
   <form [formGroup]="recherge">
-    <h3 class="ion-text-center">Retrait une Transaction </h3>
+    <h3 class="ion-text-center">Code de Transaction </h3>
     <br>
     <p style="color:red; font-size:16px">{{errorMessage}}</p>
     <br>
@@ -39,7 +39,7 @@
     <ion-row >
       <ion-col  size-sm="4" size-md="2" offset-sm="2">
 
-          <ion-button [disabled]="recherge.invalid" type="submit" expand="block" class="ion-justify-content ion-justify-top:0px"side="start" (click)="recherger()" > Rechercher</ion-button>
+          <ion-button [disabled]="recherge.invalid" shape="round" type="submit" expand="block" class="ion-justify-content ion-justify-top:0px"side="start" (click)="recherger()" > Rechercher</ion-button>
 
       </ion-col>
     </ion-row >
@@ -92,7 +92,14 @@
    <ion-row >
     <ion-col  size-sm="4" size-md="2" offset-sm="2">
 
-        <ion-button expand="block"  class="ion-justify-content " type="submit" (click)="onSubmit()" >Terminer</ion-button>
+        <ion-button color="secondary" expand="block" shape="round" class="ion-justify-content " type="submit" (click)="onSubmit()" >Terminer</ion-button>
+
+    </ion-col>
+  </ion-row>
+      <ion-row  class="ion-margin-top">
+    <ion-col  size-sm="4" size-md="2" offset-sm="2">
+
+        <ion-button expand="block" color="danger"  shape="round"  class="ion-justify-content " type="submit" (click)="annulre()" >Annulation</ion-button>
 
     </ion-col>
   </ion-row>
@@ -141,7 +148,7 @@
     <ion-row >
       <ion-col  size-sm="4" size-md="2" offset-sm="2">
 
-          <ion-button expand="block" slot="end" shop="round" class="ion-justify-content-end" type="submit" (click)="suivant()" >Suivant</ion-button>
+          <ion-button expand="block"  shape="round" class="ion-justify-content-end" type="submit" (click)="suivant()">Suivant</ion-button>
 
       </ion-col>
     </ion-row>

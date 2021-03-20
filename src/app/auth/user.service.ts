@@ -7,6 +7,7 @@ import { User } from 'src/moddules/User';
 })
 export class UserService {
   private url = 'http://127.0.0.1:8000/api/admin/users';
+  private urlAnnuler = 'http://127.0.0.1:8000/api/admin/transaction'
 
  private user: User
   constructor( private http: HttpClient) { }
@@ -28,6 +29,9 @@ export class UserService {
   }
   getAllAgences(): any {
     return this.http.get('http://127.0.0.1:8000/api/admin/agences');
+  }
+  annulerTransaction(code: number): any {
+    return this.http.get(`${this.urlAnnuler}/${code}`);
   }
 }
 

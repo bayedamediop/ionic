@@ -97,7 +97,7 @@ export class DepotPage implements OnInit {
 
   const alert = await this.alertCtrl.create({
           cssClass: "my-custom-class",
-          header: `<div>Cofirmation</div>`,
+          header: `Cofirmation`,
           message: `<div style="width: 300px; border-radius: 40%">EMETTEUR <br> NomCpmlet <strong>${this.formulaire.value.client.nomComplet}</strong><br>
                                 N°CNI  <strong>${this.formulaire.value.client.cni}</strong><br>
                                 N°CNI  <strong>${this.formulaire.value.client.phone}</strong><br>
