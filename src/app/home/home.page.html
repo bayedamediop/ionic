@@ -4,7 +4,8 @@
 <ion-row>
   <ion-col  class="hamburger haut" size-sm="4" size-md="2" offset-sm="2">
 
-        <ion-menu-button menu="main-menu"></ion-menu-button>
+<!--        <ion-menu-button menu="main-menu"></ion-menu-button>-->
+        <ion-menu-button ></ion-menu-button>
   </ion-col>
   <ion-col size-sm="4" size-md="2" offset-sm="2">
     <img class="monay" src="assets/min_logo.jpeg">
@@ -35,7 +36,7 @@
   </ion-card>
 </ion-header>
 
-<ion-content >
+<ion-content class="ion-margin-top" >
         <ion-grid>
           <ion-row>
             <ion-col  size-sm="4" size-md="4" offset-sm="2">
@@ -61,8 +62,10 @@
             <ion-col  size-sm="4" size-md="4" offset-sm="2">
               <ion-menu-toggle auto-hide="false">
                 <ion-item button>
-                  <ion-icon> name="repeat-outline" style = "color:rgb(245, 109, 59)"></ion-icon>
-                 <ion-label [routerLink]="['/mes-transaction']"> Mes transactions </ion-label >
+<!--                  <ion-icon> name="repeat-outline" style ="color:rgb(245, 109, 59)"></ion-icon>-->
+                  <ion-icon name="repeat-outline" style = "color:rgb(245, 109, 59)"></ion-icon>
+
+                  <ion-label [routerLink]="['/mes-transaction']"> Mes transactions </ion-label >
              </ion-item>
               </ion-menu-toggle>
             </ion-col>
@@ -83,6 +86,14 @@
                 <ion-item button>
                   <ion-icon name="calculator-outline" style = "color:rgb(245, 109, 59)"></ion-icon>
                   <ion-label [routerLink]="['/tabs/frais']"> Calculateur de rfais </ion-label >
+                  </ion-item>
+              </ion-menu-toggle>
+            </ion-col><ion-col  size-sm="4" size-md="4" offset-sm="2">
+              <ion-menu-toggle auto-hide="false">
+                <ion-item button>
+
+                  <ion-icon name="power-outline" slot="start" style = "color:rgb(245, 109, 59)"></ion-icon>
+                  <ion-label  (click)="logout()">Déconnection</ion-label>
                   </ion-item>
               </ion-menu-toggle>
             </ion-col>

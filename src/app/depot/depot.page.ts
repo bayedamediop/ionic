@@ -122,8 +122,8 @@ export class DepotPage implements OnInit {
                 async (data) => {
                   await loading.dismiss();
                   const alert = await this.alertCtrl.create({
-                    header: 'Succe',
                     cssClass: "my-custom-class",
+                    header: 'Success',
                     message: "Success!! ",
                     buttons: ['OK']
 
@@ -132,8 +132,8 @@ export class DepotPage implements OnInit {
                 }, async (erreur) => {
                   await loading.dismiss();
                   const alert = await this.alertCtrl.create({
-                    header: 'Failed',
                     cssClass: "my-custom-class",
+                    header: 'Failed',
                     message: erreur.error,
                     buttons: ['OK']
                   });

@@ -141,7 +141,7 @@
       <ion-col  size-sm="2" size-md="2" offset-sm="2" side="right"   >
         <ion-item style="float: right" side="right"  >
           <ion-label position="floating">Frais</ion-label>
-          <ion-input type="text"  side="right"   [disabled]  value="{{frais}}"></ion-input>
+          <ion-input  type="text" style="color: red" side="right"   [disabled]  value="{{frais}}"></ion-input>
                     <!-- <mdb-small *ngIf="nomCompletB.invalid && (nomCompletB.dirty || nomCompletB.touched)">Input invalid</mdb-small> -->
 
         </ion-item>
@@ -151,14 +151,14 @@
      <ion-col  size-sm="4" size-md="4" offset-sm="2">
         <ion-item >
           <ion-label position="floating">Total</ion-label>
-          <ion-input type="text"  [disabled] value="{{motanaTotal}}" ></ion-input>
+          <ion-input type="number" style="font-size: 40px" [disabled] value="{{motanaTotal}}" ></ion-input>
         </ion-item>
       </ion-col>
     </ion-row>
     <ion-row >
       <ion-col  size-sm="4" size-md="2" offset-sm="2">
 
-          <ion-button expand="block" shop="round" class="ion-justify-content-end" type="submit" (click)="suivant()" >Suivant</ion-button>
+          <ion-button expand="block" shape="round" class="ion-justify-content-end" type="submit" (click)="suivant()" >Suivant</ion-button>
 
       </ion-col>
     </ion-row>

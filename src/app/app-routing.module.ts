@@ -45,6 +45,22 @@ const routes: Routes = [
   {
     path: 'paramettere',
     loadChildren: () => import('./paramettere/paramettere.module').then( m => m.ParametterePageModule)
+  },
+  {
+    path: 'ajout-user',
+    loadChildren: () => import('./ajout-user/ajout-user.module').then( m => m.AjoutUserPageModule)
+  },
+  {
+    path: 'list-user',
+    loadChildren: () => import('./list-user/list-user.module').then( m => m.ListUserPageModule)
+  },
+  {
+    path: 'depot-agence',
+    loadChildren: () => import('./depot-agence/depot-agence.module').then( m => m.DepotAgencePageModule)
+  },
+  {
+    path: 'edit-user/:id',
+    loadChildren: () => import('./edit-user/edit-user.module').then( m => m.EditUserPageModule)
   }
 ];
 @NgModule({

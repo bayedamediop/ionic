@@ -9,6 +9,8 @@ import { AppComponent } from './app.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Interceptor } from 'src/__helper/Interceptor';
 import {LodinGuard} from "./guard/LodinGuard";
+import {NgxDatatableModule} from "@swimlane/ngx-datatable";
+import {JwPaginationModule} from "jw-angular-pagination";
 
 @NgModule({
   declarations: [AppComponent],
@@ -19,7 +21,9 @@ import {LodinGuard} from "./guard/LodinGuard";
     ReactiveFormsModule,
     IonicModule.forRoot(),
      AppRoutingModule,
-      HttpClientModule],
+      HttpClientModule,
+    JwPaginationModule
+  ],
   providers: [{provide: HTTP_INTERCEPTORS, useClass: Interceptor, multi: true},
   LodinGuard],
   bootstrap: [AppComponent],

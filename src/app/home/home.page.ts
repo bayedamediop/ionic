@@ -3,6 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../auth/auth.service';
 import {JwtHelperService} from '@auth0/angular-jwt';
 import { UserService } from '../auth/user.service';
+import {log} from "util";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-home',
@@ -11,7 +13,8 @@ import { UserService } from '../auth/user.service';
 })
 export class HomePage implements OnInit {
 
-  constructor( private http: HttpClient, private authservice: AuthService, private userService: UserService) { }
+  constructor( private http: HttpClient, private authservice: AuthService,
+               private userService: UserService, private router: Router) { }
   token: any;
   nameUserConnected: string;
   nom: string;
@@ -38,7 +41,8 @@ export class HomePage implements OnInit {
 
       this.users.forEach((element: any) => {
         if (element.email === this.nameUserConnected) {
-            this.solde=(element['agences'][0]['compte'].solde);
+          console.log( this.solde=(element['agence']['compte'].solde));
+            //this.solde=(element['agence']['compte'].solde);
 
           //console.log(this.idUserConnected),
            this.nom = element.nom;
@@ -59,11 +63,19 @@ export class HomePage implements OnInit {
   }
 
   // tslint:disable-next-line:typedef
-  logout() {
-    if (confirm('Are you sure you want logout?')) {
-      const token = localStorage.getItem('token') ;
-      localStorage.clear();
-    }
+  // logout() {
+  //   if (confirm('Are you sure you want logout?')) {
+  //     const token = localStorage.getItem('token') ;
+  //     localStorage.clear();
+  //     this.router.navigateByUrl('');
+  //   }
+  // }
+  logout(){
+    this.authservice.logout();
+        this.router.navigateByUrl('');
+
+
+
   }
 
 }
