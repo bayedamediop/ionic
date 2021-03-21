@@ -11,6 +11,7 @@ import { Interceptor } from 'src/__helper/Interceptor';
 import {LodinGuard} from "./guard/LodinGuard";
 import {NgxDatatableModule} from "@swimlane/ngx-datatable";
 import {JwPaginationModule} from "jw-angular-pagination";
+import {PipesModule} from "./pipes/pipes.module";
 
 @NgModule({
   declarations: [AppComponent],
@@ -22,6 +23,7 @@ import {JwPaginationModule} from "jw-angular-pagination";
     IonicModule.forRoot(),
      AppRoutingModule,
       HttpClientModule,
+    PipesModule,
     JwPaginationModule
   ],
   providers: [{provide: HTTP_INTERCEPTORS, useClass: Interceptor, multi: true},

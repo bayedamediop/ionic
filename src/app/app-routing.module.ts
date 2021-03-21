@@ -43,7 +43,7 @@ const routes: Routes = [
     loadChildren: () => import('./toutes-mes-transaction/toutes-mes-transaction.module').then( m => m.ToutesMesTransactionPageModule)
   },
   {
-    path: 'paramettere',
+    path: 'paramettere/:idUpdate',
     loadChildren: () => import('./paramettere/paramettere.module').then( m => m.ParametterePageModule)
   },
   {

@@ -5,6 +5,7 @@ import { AlertController, LoadingController } from '@ionic/angular';
 import { AuthService } from '../auth/auth.service';
 import { TransactionService } from '../auth/transaction.service';
 import { UserService } from '../auth/user.service';
+import {Router} from "@angular/router";
 
 
 @Component({
@@ -38,7 +39,7 @@ export class DepotPage implements OnInit {
   constructor( private authService: AuthService ,
     private fb: FormBuilder, private userService: UserService,
     private loadingCtrl: LoadingController,
-    private transaction: TransactionService,
+    private transaction: TransactionService,private router: Router,
                private alertCtrl: AlertController) { }
   token: any;
   nameUserConnected: string;
@@ -120,6 +121,7 @@ export class DepotPage implements OnInit {
               await alert.present();
               this.transaction.addTransaction(this.formulaire.value).subscribe(
                 async (data) => {
+                  this.router.navigate(['/home']);
                   await loading.dismiss();
                   const alert = await this.alertCtrl.create({
                     cssClass: "my-custom-class",

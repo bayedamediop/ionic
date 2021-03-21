@@ -5,6 +5,7 @@ import { TransactionService } from '../auth/transaction.service';
 import { Transaction } from 'src/moddules/Transactions';
 import { AlertController, LoadingController } from '@ionic/angular';
 import {UserService} from "../auth/user.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-retrait',
@@ -40,7 +41,7 @@ export class RetraitPage implements OnInit {
 
   }
   constructor( private authService: TransactionService,private userservic: UserService,
-private loadingCtrl: LoadingController,
+private loadingCtrl: LoadingController,private router: Router,
      private alertCtrl: AlertController) { }
   firstFormGroup: FormGroup;
   formulaire: FormGroup;
@@ -95,6 +96,7 @@ formTerminer = new FormGroup({
                   //await loading.present();
                   this.authService.retrait(this.recherge.value.code,this.formTerminer.value) .subscribe (
                     async (data) => {
+                      this.router.navigate(['/admin']);
                      await  loading.dismiss();
                       const alert = await this.alertCtrl.create({
                         cssClass: "my-custom-class",
