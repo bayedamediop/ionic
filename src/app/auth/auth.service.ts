@@ -24,18 +24,14 @@ export class AuthService {
         console.log(decoded.roles);
          if (decoded.roles[0] === 'ROLE_ADMIN') {
          this.router.navigateByUrl('/admin');
+         }else if (decoded.roles[0] === 'ROLE_CAISSIER'){
+           this.router.navigateByUrl('/admin');
          }
         else {
           this.router.navigateByUrl('/tabs');
 
          }
-          //else if (decoded.roles === 'ROLE_CM') {
-        //   this.router.navigate(['users']);
-        //   // this.router.navigate(['cm']);
-        // }else if (decoded.roles === 'ROLE_APPRENANT') {
-        //  // console.log('apprenant');
-        //   // this.router.navigate(['apprenant']);
-        // }
+
       })
     );
   }
@@ -57,5 +53,5 @@ export class AuthService {
   getAllfrais() {
     return this.http.get(`${this.url}/admin/tarifs`)
   }
- 
+
 }

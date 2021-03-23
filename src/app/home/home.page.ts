@@ -16,6 +16,8 @@ export class HomePage implements OnInit {
   constructor( private http: HttpClient, private authservice: AuthService,
                private userService: UserService, private router: Router) { }
   token: any;
+  showPassword = true;
+  passwordToggleIcon: any;
   nameUserConnected: string;
   nom: string;
   prenom: string;
@@ -41,8 +43,8 @@ export class HomePage implements OnInit {
 
       this.users.forEach((element: any) => {
         if (element.email === this.nameUserConnected) {
-          console.log( this.solde=(element['agence']['compte'].solde));
-            //this.solde=(element['agence']['compte'].solde);
+          this.solde=(element['agence']['compte'].solde);
+          //this.solde=(element['agence']['compte'].solde);
 
           //console.log(this.idUserConnected),
            this.nom = element.nom;
@@ -59,23 +61,14 @@ export class HomePage implements OnInit {
         }
       }) ;
     });
-    // const tokenDecoded = this.helper.decodeToken(response.token) ;
+
   }
 
-  // tslint:disable-next-line:typedef
-  // logout() {
-  //   if (confirm('Are you sure you want logout?')) {
-  //     const token = localStorage.getItem('token') ;
-  //     localStorage.clear();
-  //     this.router.navigateByUrl('');
-  //   }
-  // }
+
   logout(){
     this.authservice.logout();
         this.router.navigateByUrl('');
 
-
-
   }
-
+  togglrPasswors(){}
 }
